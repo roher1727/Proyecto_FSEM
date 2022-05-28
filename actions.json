@@ -1,0 +1,280 @@
+{
+    "manifest": {
+        "displayName": "Invernadero",
+        "invocationName": "Invernadero",
+        "category": "PRODUCTIVITY"
+    },
+    "locale": "es",
+    "actions": [
+        {
+            "name": "com.invernadero.actions.status",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.invernadero.intents.status",
+                "parameters" : [
+                    {
+                        "name" : "dummy",
+                        "type" : "SchemaOrg_Number"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "estatus (del)? (de)? (el)? (invernadero)?"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": ""
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.invernadero.commands.status",
+                                    "params": {
+                                        "dummy": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "name": "com.invernadero.actions.light_on",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.invernadero.intents.light_on",
+                "parameters" : [
+                    {
+                        "name" : "dummy",
+                        "type" : "SchemaOrg_Number"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "activar (el)? sol",
+                        "prende (el)? sol",
+                        "prender (el)? sol",
+                        "encender (el)? sol"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": ""
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.invernadero.commands.light_on",
+                                    "params": {
+                                        "dummy": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "name": "com.invernadero.actions.light_off",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.invernadero.intents.light_off",
+                "parameters" : [
+                    {
+                        "name" : "dummy",
+                        "type" : "SchemaOrg_Number"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "desactivar (el)? sol",
+                        "apagar (el)? sol",
+                        "apaga (el)? sol"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": ""
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.invernadero.commands.light_off",
+                                    "params": {
+                                        "dummy": "0"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "name": "com.invernadero.actions.water",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.invernadero.intents.water",
+                "parameters" : [
+                    {
+                        "name" : "mode",
+                        "type" : "ModoRiego"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "regar (las)? (plantas)? ($ModoRiego:mode)?"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": ""
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.invernadero.commands.water",
+                                    "params": {
+                                        "mode": "$mode"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "name": "com.invernadero.actions.setmode",
+            "availability": {
+                "deviceClasses": [
+                    {
+                        "assistantSdkDevice": {}
+                    }
+                ]
+            },
+            "intent": {
+                "name": "com.invernadero.intents.setmode",
+                "parameters" : [
+                    {
+                        "name" : "mode",
+                        "type" : "FuncionalidadOnOff"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "($FuncionalidadOnOff:mode)? modo automático ($FuncionalidadOnOff:mode)?",
+                        "($FuncionalidadOnOff:mode)? modo autónomo ($FuncionalidadOnOff:mode)?"
+                    ]
+                }
+            },
+            "fulfillment": {
+                "staticFulfillment": {
+                    "templatedResponse": {
+                        "items": [
+                            {
+                                "simpleResponse": {
+                                    "textToSpeech": ""
+                                }
+                            },
+                            {
+                                "deviceExecution": {
+                                    "command": "com.invernadero.commands.setmode",
+                                    "params": {
+                                        "mode": "$mode"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ],
+    "types": [
+        {
+            "name": "$ModoRiego",
+            "entities": [
+                {
+                    "key": "force",
+                    "synonyms": [
+                        "forzado",
+                        "modo forzado",
+                        "forzoso",
+                        "modo forzoso"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "$FuncionalidadOnOff",
+            "entities": [
+                {
+                    "key": "on",
+                    "synonyms": [
+                        "encendido",
+                        "encender",
+                        "activar",
+                        "activado"
+                    ]
+                },
+                {
+                    "key": "off",
+                    "synonyms": [
+                        "apagado",
+                        "apagar",
+                        "desactivar",
+                        "desactivado"
+                    ]
+                }
+            ]
+        }
+    ]
+}
